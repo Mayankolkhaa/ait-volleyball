@@ -1,0 +1,21 @@
+export const memories = [
+  { id: 1, category: "Team", image: "/images/memories/memories-1.jpeg", title: "Get Togather" },
+  { id: 2, category: "Practice", image: "/images/memories/memories-2.jpeg", title: "Training Session" },
+  { id: 3, category: "Tournament", image: "/images/memories/memories-3.jpeg", title: "Tournament Day" },
+  { id: 4, category: "Tournament", image: "/images/memories/memories-4.jpeg", title: "Match day" },
+  { id: 5, category: "Tournament", image: "/images/memories/memories-5.jpeg", title: "Fighting for points" },
+  { id: 6, category: "Tournament", image: "/images/memories/memories-6.jpeg", title: "First change" },
+    { id: 7, category: "Campus", image: "/images/memories/memories-7.jpeg", title: "Old days" },
+  { id: 8, category: "Practice", image: "/images/memories/memories-8.jpeg", title: "Training Session" },
+  { id: 9, category: "Tournament", image: "/images/memories/memories-9.jpeg", title: "Tournament day" },
+  { id: 10, category: "Tournament", image: "/images/memories/memories-10.jpeg", title: "Winning moment" },
+  { id: 11, category: "Campus", image: "/images/memories/memories-11.jpeg", title: "Cuties" },
+  { id: 12, category: "Campus", image: "/images/memories/memories-12.jpeg", title: "Looking for Baddies" },
+  { id: 13, category: "Campus", image: "/images/memories/memories-13.jpeg", title: "With alumans" },
+  { id: 14, category: "Tournament", image: "/images/memories/memories-14.jpeg", title: "Moment hai bhai moment" },
+    { id: 15, category: "Tournament", image: "/images/memories/memories-15.jpeg", title: "Winning moment" },
+  { id: 16, category: "Tournament", image: "/images/memories/memories-16.jpeg", title: "Tournament Day" },
+  { id: 17, category: "Team", image: "/images/memories/memories-17.jpeg", title: "Fun" },
+  { id: 18, category: "Team", image: "/images/memories/memories-18.jpeg", title: "Together" },
+  { id: 19, category: "Team", image: "/images/memories/memories-19.jpeg", title: "Togather" }
+];
