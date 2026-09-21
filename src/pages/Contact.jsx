@@ -1,61 +1,223 @@
-import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowUpRight,
+} from "lucide-react";
 import PageHero from "../components/PageHero";
 import Reveal from "../components/Reveal";
-import { Instagram, Linkedin, Youtube, Mail, MapPin, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function Contact() {
-  const [sent, setSent] = useState(false);
-
-  const submit = (e) => {
-    e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3500);
-  };
+  const socials = [
+    {
+      name: "Instagram",
+      handle: "@aitvolleyball",
+      href: "https://www.instagram.com/aitvolleyball/",
+      icon: Instagram,
+    },
+    {
+      name: "LinkedIn",
+      handle: "ait-volley",
+      href: "https://www.linkedin.com/in/ait-volley/",
+      icon: Linkedin,
+    },
+  ];
 
   return (
     <>
-      <PageHero eyebrow="Let's build a stronger volleyball community." title="Get In Touch" subtitle="Want to connect with AIT Volleyball, collaborate, support the team or share something with us?" image="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=2200&q=85" />
-      <section className="bg-[#F5F7FA] py-20 sm:py-28">
-        <div className="container-site grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
-          <Reveal>
-            <p className="text-xs font-black uppercase tracking-[.22em] text-[#FFC928]">Contact</p>
-            <h2 className="display mt-3 text-7xl leading-none text-[#071A2B] sm:text-8xl">LET'S<br />TALK.</h2>
-            <p className="mt-7 max-w-md text-sm leading-7 text-slate-500">Whether you are a player, supporter, event organizer or someone who simply loves the game — we'd love to hear from you.</p>
-            <div className="mt-10 space-y-5 text-sm text-slate-600">
-              <p className="flex items-center gap-4"><Mail className="text-[#071A2B]" size={18} /> volleyball@ait.edu</p>
-              <p className="flex items-center gap-4"><MapPin className="text-[#071A2B]" size={18} /> AIT, Pune, Maharashtra</p>
-            </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-              {[[Instagram, "Instagram"], [Youtube, "YouTube"], [Linkedin, "LinkedIn"]].map(([Icon, label]) => (
-                <a key={label} href="#" className="flex items-center justify-between border border-slate-200 bg-white p-4 text-sm font-bold text-[#071A2B] transition hover:-translate-y-1 hover:border-[#FFC928]">
-                  <span className="flex items-center gap-3"><Icon size={17} /> {label}</span><ArrowUpRight size={16} />
-                </a>
-              ))}
-            </div>
-          </Reveal>
+      <PageHero
+        eyebrow="Stay Connected"
+        title="Contact Us"
+        subtitle="Connect with AIT Volleyball for matches, collaborations, events and team updates."
+        image="https://images.unsplash.com/photo-1530137073521-4d2e5f5b4b9a?auto=format&fit=crop&w=2200&q=85"
+      />
 
-          <Reveal delay={.12}>
-            <form onSubmit={submit} className="relative overflow-hidden rounded-2xl bg-white p-7 shadow-sm sm:p-10">
-              <div className="absolute right-0 top-0 h-28 w-28 rounded-bl-full bg-[#FFC928]/15" />
-              <div className="grid gap-6">
-                {["Name", "Email"].map(label => (
-                  <label key={label} className="text-xs font-black uppercase tracking-widest text-[#071A2B]">
-                    {label}
-                    <input required className="mt-3 w-full border border-slate-200 px-4 py-4 text-sm outline-none transition focus:border-[#FFC928] focus:ring-4 focus:ring-[#FFC928]/10" placeholder={`Your ${label.toLowerCase()}`} />
-                  </label>
-                ))}
-                <label className="text-xs font-black uppercase tracking-widest text-[#071A2B]">
-                  Message
-                  <textarea required rows="7" className="mt-3 w-full resize-none border border-slate-200 px-4 py-4 text-sm outline-none transition focus:border-[#FFC928] focus:ring-4 focus:ring-[#FFC928]/10" placeholder="Tell us what's on your mind..." />
-                </label>
-                <button disabled={sent} className="flex items-center justify-center gap-2 bg-[#FFC928] px-6 py-4 text-xs font-black uppercase tracking-widest text-[#071A2B] transition hover:bg-[#071A2B] hover:text-white disabled:opacity-80">
-                  {sent ? <>Message Ready <CheckCircle2 size={16} /></> : <>Send Message <ArrowUpRight size={16} /></>}
-                </button>
+      <section className="bg-[#F5F7FA] py-20 sm:py-28">
+        <div className="container-site">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+
+            {/* Left Side */}
+            <Reveal>
+              <div className="rounded-2xl bg-[#071A2B] p-8 text-white sm:p-10">
+                <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-[#FFC928]">
+                  AIT Volleyball
+                </p>
+
+                <h2 className="display text-5xl leading-none sm:text-6xl">
+                  LET'S CONNECT.
+                </h2>
+
+                <p className="mt-6 max-w-md text-sm leading-7 text-slate-300">
+                  Whether you're a player, supporter, college team, organizer,
+                  or simply passionate about volleyball — we'd love to hear
+                  from you.
+                </p>
+
+                <div className="mt-10 space-y-5">
+
+                  {/* Email */}
+                  <a
+                    href="mailto:itsmrolkha@gmail.com"
+                    className="group flex items-center gap-4"
+                  >
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 transition group-hover:bg-[#FFC928] group-hover:text-[#071A2B]">
+                      <Mail size={18} />
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Email
+                      </p>
+                      <p className="mt-1 text-sm font-semibold">
+                        itsmrolkha@gmail.com
+                      </p>
+                    </div>
+                  </a>
+
+                  {/* Phone */}
+                  <a
+                    href="tel:7410901181"
+                    className="group flex items-center gap-4"
+                  >
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 transition group-hover:bg-[#FFC928] group-hover:text-[#071A2B]">
+                      <Phone size={18} />
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Phone
+                      </p>
+                      <p className="mt-1 text-sm font-semibold">
+                        +91 74109 01181
+                      </p>
+                    </div>
+                  </a>
+
+                  {/* Address */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10">
+                      <MapPin size={18} />
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Location
+                      </p>
+                      <p className="mt-1 text-sm font-semibold">
+                        AIT Pune, Dighi
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
               </div>
-              {sent && <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="absolute inset-x-5 bottom-5 rounded-xl bg-[#071A2B] p-4 text-center text-xs font-bold text-white">Thanks — your message is ready for the team.</motion.div>}
-            </form>
-          </Reveal>
+            </Reveal>
+
+            {/* Right Side */}
+            <div className="grid gap-5 sm:grid-cols-2">
+
+              {socials.map((social, index) => {
+                const Icon = social.icon;
+
+                return (
+                  <Reveal key={social.name} delay={index * 0.08}>
+                    <motion.a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ y: -5 }}
+                      className="group flex min-h-[220px] flex-col justify-between rounded-2xl bg-white p-7 shadow-sm transition-shadow hover:shadow-xl"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#071A2B] text-white transition-colors group-hover:bg-[#FFC928] group-hover:text-[#071A2B]">
+                          <Icon size={21} />
+                        </div>
+
+                        <ArrowUpRight
+                          size={20}
+                          className="text-slate-300 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#071A2B]"
+                        />
+                      </div>
+
+                      <div>
+                        <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+                          {social.name}
+                        </p>
+
+                        <h3 className="mt-2 text-xl font-extrabold text-[#071A2B]">
+                          {social.handle}
+                        </h3>
+                      </div>
+                    </motion.a>
+                  </Reveal>
+                );
+              })}
+
+              {/* Email Card */}
+              <Reveal delay={0.16}>
+                <motion.a
+                  href="mailto:itsmrolkha@gmail.com"
+                  whileHover={{ y: -5 }}
+                  className="group flex min-h-[220px] flex-col justify-between rounded-2xl bg-[#fcfbf8] p-7 shadow-sm transition-shadow hover:shadow-xl"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#071A2B] text-white">
+                      <Mail size={21} />
+                    </div>
+
+                    <ArrowUpRight
+                      size={20}
+                      className="text-[#071A2B]"
+                    />
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-widest text-[#071A2B]/60">
+                      Email Us
+                    </p>
+
+                    <h3 className="mt-2 break-all text-lg font-extrabold text-[#071A2B]">
+                      itsmrolkha@gmail.com
+                    </h3>
+                  </div>
+                </motion.a>
+              </Reveal>
+
+              {/* Phone Card */}
+              <Reveal delay={0.24}>
+                <motion.a
+                  href="tel:7410901181"
+                  whileHover={{ y: -5 }}
+                  className="group flex min-h-[220px] flex-col justify-between rounded-2xl bg-white p-7 shadow-sm transition-shadow hover:shadow-xl"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#071A2B] text-white transition-colors group-hover:bg-[#FFC928] group-hover:text-[#071A2B]">
+                      <Phone size={21} />
+                    </div>
+
+                    <ArrowUpRight
+                      size={20}
+                      className="text-slate-300 group-hover:text-[#071A2B]"
+                    />
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+                      Call Us
+                    </p>
+
+                    <h3 className="mt-2 text-xl font-extrabold text-[#071A2B]">
+                      +91 74109 01181
+                    </h3>
+                  </div>
+                </motion.a>
+              </Reveal>
+
+            </div>
+          </div>
         </div>
       </section>
     </>
