@@ -41,7 +41,7 @@ export default function Navbar() {
   className="flex h-11 items-center"
 >
   <img
-    src="/images/logo/ait-volleyball-logo.jpeg"
+    src="/images/logo/ait-volleyball-logo.png"
     alt="AIT Volleyball"
     className="h-11 w-auto rounded-2xl object-contain"
   />

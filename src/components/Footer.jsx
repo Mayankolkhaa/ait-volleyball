@@ -32,9 +32,9 @@ export default function Footer() {
         {/* BRAND */}
         <div>
           <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-white p-1">
+            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl bg-[#071A2B] p-1">
               <img
-                src="/images/logo/ait-volleyball-logo.jpeg"
+                src="/images/logo/ait-volleyball-logo.png"
                 alt="AIT Volleyball"
                 className="h-full w-full object-contain"
               />
