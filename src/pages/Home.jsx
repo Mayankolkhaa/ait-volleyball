@@ -174,33 +174,118 @@ export default function Home() {
       </section>
 
       {/* JOURNEY - HORIZONTAL FEEL */}
-      <section ref={journeyRef} className="relative min-h-[150vh] bg-[#F5F7FA]">
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <motion.div style={{ x: journeyX, opacity: journeyOpacity }} className="flex min-w-max items-center gap-10 pl-[8vw] pr-[12vw]">
-            <div className="w-[46vw] min-w-[360px]">
-              <SectionMarker number="03" label="Milestones that made us stronger" />
-              <h2 className="display text-7xl leading-[.82] text-[#071A2B] sm:text-[9rem]">OUR<br /><span className="text-[#FFC928]">JOURNEY</span></h2>
-              <p className="mt-6 max-w-md text-sm leading-7 text-slate-500">Scroll through the chapters that shaped AIT Volleyball.</p>
-            </div>
+      {/* JOURNEY */}
+<section className="relative overflow-hidden bg-[#F5F7FA] py-28 sm:py-36">
+  <div className="container-site">
 
-            <div className="relative flex items-center gap-0">
-              <div className="absolute left-0 right-0 top-1/2 h-px bg-slate-300" />
-              {journey.map((item, i) => (
-                <div key={item.year} className="relative flex w-[310px] shrink-0 flex-col justify-center px-7">
-                  <div className="relative z-10 mb-12 grid h-12 w-12 place-items-center rounded-full border-4 border-[#F5F7FA] bg-[#FFC928] text-xs font-black text-[#071A2B]">{item.year.slice(2)}</div>
-                  <p className="display text-6xl text-[#071A2B]">{item.year}</p>
-                  <h3 className="mt-2 text-lg font-extrabold text-[#071A2B]">{item.title}</h3>
-                  <p className="mt-3 max-w-xs text-sm leading-6 text-slate-500">{item.text}</p>
-                </div>
-              ))}
-            </div>
+    {/* Heading */}
+    <Reveal>
+      <SectionMarker
+        number="03"
+        label="Milestones that made us stronger"
+      />
 
-            <Link to="/journey" className="inline-flex items-center gap-3 bg-[#071A2B] px-6 py-4 text-xs font-black uppercase tracking-widest text-white hover:bg-[#FFC928] hover:text-[#071A2B]">
-              Full Timeline <ArrowRight size={16} />
-            </Link>
-          </motion.div>
+      <div className="max-w-3xl">
+        <h2 className="display text-7xl leading-[.82] text-[#071A2B] sm:text-[9rem]">
+          OUR
+          <br />
+          <span className="text-[#FFC928]">JOURNEY</span>
+        </h2>
+
+        <p className="mt-7 max-w-xl text-sm leading-7 text-slate-500 sm:text-base">
+          From building a new team to competing beyond campus,
+          every season has added another chapter to the AIT Volleyball story.
+        </p>
+      </div>
+    </Reveal>
+
+    {/* Timeline */}
+    <div className="relative mt-20">
+
+      {/* Vertical timeline line */}
+      <div className="absolute left-[15px] top-0 h-full w-px bg-slate-300 sm:left-1/2 sm:-translate-x-1/2" />
+
+      <div className="space-y-14 sm:space-y-20">
+        {journey.map((item, i) => (
+          <Reveal
+            key={`${item.year}-${item.title}`}
+            delay={i * 0.05}
+          >
+            <div
+              className={`relative grid items-center gap-8 sm:grid-cols-2 sm:gap-16 ${
+                i % 2 === 0 ? "" : "sm:[&>div:first-child]:order-2"
+              }`}
+            >
+
+              {/* Content */}
+              <div
+                className={`pl-12 sm:pl-0 ${
+                  i % 2 === 0
+                    ? "sm:pr-14 sm:text-right"
+                    : "sm:pl-14"
+                }`}
+              >
+                {/* Year */}
+                <p className="display text-5xl leading-none text-[#071A2B] sm:text-6xl">
+                  {item.year}
+                </p>
+
+                {/* Title */}
+                <h3 className="mt-3 text-xl font-extrabold text-[#071A2B] sm:text-2xl">
+                  {item.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className={`mt-3 max-w-lg text-sm leading-7 text-slate-500 ${
+                    i % 2 === 0 ? "sm:ml-auto" : ""
+                  }`}
+                >
+                  {item.text}
+                </p>
+              </div>
+
+              {/* Timeline Dot */}
+              <div
+                className={`absolute left-0 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-[5px] border-[#F5F7FA] bg-[#FFC928] shadow-[0_0_0_1px_rgba(7,26,43,.15)] sm:left-1/2 sm:-translate-x-1/2`}
+              >
+                <span className="h-2 w-2 rounded-full bg-[#071A2B]" />
+              </div>
+
+              {/* Empty opposite side */}
+              <div className="hidden sm:block" />
+
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+
+    {/* Bottom CTA */}
+    <Reveal delay={0.2}>
+      <div className="mt-20 flex flex-col items-start justify-between gap-6 border-t border-slate-200 pt-8 sm:flex-row sm:items-center">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#FFC928]">
+            The story continues
+          </p>
+
+          <p className="mt-2 text-sm text-slate-500">
+            More matches. More memories. More chapters ahead.
+          </p>
         </div>
-      </section>
+
+        <Link
+          to="/journey"
+          className="inline-flex items-center gap-3 bg-[#071A2B] px-6 py-4 text-xs font-black uppercase tracking-widest text-white transition hover:-translate-y-1 hover:bg-[#FFC928] hover:text-[#071A2B]"
+        >
+          Full Timeline
+          <ArrowRight size={16} />
+        </Link>
+      </div>
+    </Reveal>
+
+  </div>
+</section>
 
       {/* PLAYERS */}
       <section className="bg-[#071A2B] py-28 sm:py-36">
