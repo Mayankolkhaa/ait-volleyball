@@ -1,5 +1,10 @@
 const dns = require("dns");
-
+console.log("========== RUNTIME DIAGNOSTICS ==========");
+console.log("Node:", process.version);
+console.log("OpenSSL:", process.versions.openssl);
+console.log("Platform:", process.platform);
+console.log("Architecture:", process.arch);
+console.log("==========================================");
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 require("dotenv").config();
