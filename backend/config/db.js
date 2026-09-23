@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      tls: true,
+      serverSelectionTimeoutMS: 30000,
+    });
 
     console.log("MongoDB Connected");
   } catch (error) {
@@ -16,7 +19,10 @@ const connectDB = async () => {
       for (const [address, server] of error.reason.servers) {
         console.error(`Server: ${address}`);
         console.error("Type:", server.type);
-        console.error("Error:", server.error?.message || server.error);
+        console.error(
+          "Error:",
+          server.error?.message || server.error
+        );
         console.error("Error name:", server.error?.name);
       }
     }
