@@ -9,10 +9,19 @@ const connectDB = async () => {
     console.error("========== MongoDB Connection Failed ==========");
     console.error("Message:", error.message);
     console.error("Name:", error.name);
-    console.error("Code:", error.code);
-    console.error("Reason:", error.reason);
-    console.error("Cause:", error.cause);
-    console.error("================================================");
+
+    if (error.reason?.servers) {
+      console.error("========== SERVER ERRORS ==========");
+
+      for (const [address, server] of error.reason.servers) {
+        console.error(`Server: ${address}`);
+        console.error("Type:", server.type);
+        console.error("Error:", server.error?.message || server.error);
+        console.error("Error name:", server.error?.name);
+      }
+    }
+
+    console.error("==============================================");
 
     process.exit(1);
   }
