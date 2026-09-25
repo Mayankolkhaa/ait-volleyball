@@ -24,6 +24,10 @@ const eventRoutes = require("./routes/eventRoutes");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+console.log("========== PORT DIAGNOSTIC ==========");
+console.log("PORT from Railway:", process.env.PORT);
+console.log("PORT used by app:", PORT);
+console.log("=====================================");
 
 const server = http.createServer(app);
 
@@ -191,23 +195,19 @@ process.on("unhandledRejection", (reason) => {
 });
 
 const startServer = () => {
-  // Start HTTP server FIRST
-  server.listen(PORT, "0.0.0.0", async () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Health check: /health`);
-    console.log(`TLS diagnostic: /diagnostics/tls`);
-
-    // Try MongoDB AFTER server is already running
-    try {
-      await connectDB();
-
-      console.log("MongoDB Connected Successfully");
-    } catch (error) {
-      console.error("MongoDB connection failed.");
-      console.error("But HTTP server will remain running.");
-      console.error(error.message);
-    }
+  server.listen(PORT, "0.0.0.0", () => {
+    console.log(`SERVER IS LISTENING ON ${PORT}`);
   });
+
+  connectDB()
+    .then(() => {
+      console.log("MongoDB Connected Successfully");
+    })
+    .catch((error) => {
+      console.error("MongoDB connection failed.");
+      console.error(error.message);
+      console.error("HTTP server will remain running.");
+    });
 };
 
 startServer();
