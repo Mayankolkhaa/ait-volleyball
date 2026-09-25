@@ -180,19 +180,36 @@ io.on("connection", (socket) => {
 // ==========================================
 // START SERVER
 // ==========================================
+process.on("uncaughtException", (error) => {
+  console.error("========== UNCAUGHT EXCEPTION ==========");
+  console.error(error);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("========== UNHANDLED REJECTION ==========");
+  console.error(reason);
+});
 
 const startServer = async () => {
+  console.log("========== START SERVER ==========");
+  console.log("About to connect to MongoDB...");
+
   try {
     await connectDB();
+
+    console.log("MongoDB connection successful.");
+    console.log("Starting normal server...");
 
     server.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on port ${PORT}`);
     });
-  } catch (error) {
-    console.error("Server startup failed:");
-    console.error(error.message);
 
-    // TEMPORARY DIAGNOSTIC MODE
+  } catch (error) {
+    console.error("========== STARTUP CATCH ==========");
+    console.error("MongoDB startup failed.");
+    console.error("Error:", error.message);
+    console.error("===================================");
+
     server.listen(PORT, "0.0.0.0", () => {
       console.log(
         `Server running in diagnostic mode on port ${PORT}`
