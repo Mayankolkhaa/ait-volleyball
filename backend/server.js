@@ -190,32 +190,24 @@ process.on("unhandledRejection", (reason) => {
   console.error(reason);
 });
 
-const startServer = async () => {
-  console.log("========== START SERVER ==========");
-  console.log("About to connect to MongoDB...");
+const startServer = () => {
+  // Start HTTP server FIRST
+  server.listen(PORT, "0.0.0.0", async () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Health check: /health`);
+    console.log(`TLS diagnostic: /diagnostics/tls`);
 
-  try {
-    await connectDB();
+    // Try MongoDB AFTER server is already running
+    try {
+      await connectDB();
 
-    console.log("MongoDB connection successful.");
-    console.log("Starting normal server...");
-
-    server.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-
-  } catch (error) {
-    console.error("========== STARTUP CATCH ==========");
-    console.error("MongoDB startup failed.");
-    console.error("Error:", error.message);
-    console.error("===================================");
-
-    server.listen(PORT, "0.0.0.0", () => {
-      console.log(
-        `Server running in diagnostic mode on port ${PORT}`
-      );
-    });
-  }
+      console.log("MongoDB Connected Successfully");
+    } catch (error) {
+      console.error("MongoDB connection failed.");
+      console.error("But HTTP server will remain running.");
+      console.error(error.message);
+    }
+  });
 };
 
 startServer();
