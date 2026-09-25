@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io(import.meta.env.VITE_API_URL);
+const SOCKET_URL = import.meta.env.VITE_API_URL;
 
 console.log("🔌 Connecting Socket.IO to:", SOCKET_URL);
 
