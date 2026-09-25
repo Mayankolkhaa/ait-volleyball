@@ -26,7 +26,7 @@ import Reveal from "../components/Reveal";
 /* =========================================================
    FILTERS
 ========================================================= */
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 const tabs = ["Upcoming", "Live", "Past", "All"];
 
 /* =========================================================

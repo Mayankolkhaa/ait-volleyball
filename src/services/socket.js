@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:5000";
+const socket = io(import.meta.env.VITE_API_URL);
 
 console.log("🔌 Connecting Socket.IO to:", SOCKET_URL);
 

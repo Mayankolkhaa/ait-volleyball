@@ -1160,3 +1160,5 @@ export default function Events() {
 }
 ----------------------
 MONGO_URI=mongodb+srv://itsmrolkha1318_db_user:pyTH4p0TJaf8nC7T@aitvolleyball.s4sbnkg.mongodb.net/?appName=AitVolleyball
+
+MONGO_URI=mongodb+srv://itsmrolkha1318_db_user:pyTH4p0TJaf8nC7T@aitvolleyball.s4sbnkg.mongodb.net/?appName=AitVolleyball
