@@ -78,4 +78,12 @@ const startServer = async () => {
   }
 };
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    status: "healthy",
+    message: "AIT Volleyball backend is running",
+  });
+});
+
 startServer();
