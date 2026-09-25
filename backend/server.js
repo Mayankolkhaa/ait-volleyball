@@ -98,8 +98,8 @@ app.get("/diagnostics/tls", async (req, res) => {
           rejectUnauthorized: false,
 
           // Force TLS 1.2 at the native Node TLS layer
-          minVersion: "TLSv1.2",
-          maxVersion: "TLSv1.2",
+          minVersion: "TLSv1.3",
+          maxVersion: "TLSv1.3",
         },
         () => {
           console.log("RAW TLS: CONNECTED");
