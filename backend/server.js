@@ -74,8 +74,10 @@ const startServer = async () => {
   } catch (error) {
     console.error("Server startup failed:");
     console.error(error.message);
-    process.exit(1);
-  }
+    server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running in diagnostic mode on port ${PORT}`);
+  });
+}
 };
 
 app.get("/health", (req, res) => {
