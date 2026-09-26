@@ -277,55 +277,6 @@ function PlayerCard({ player }) {
                   #{player.number} · Tap to reveal
                 </p>
               </div>
-
-              {/* SOCIAL ICONS */}
-
-              <div
-                className="flex gap-2"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {player.instagram && (
-                  <a
-                    href={player.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="
-                      grid h-9 w-9
-                      place-items-center
-                      border border-white/25
-                      bg-black/20
-                      text-white/75
-                      backdrop-blur-md
-                      transition
-                      hover:border-[#FFC928]
-                      hover:text-[#FFC928]
-                    "
-                  >
-                    <Instagram size={15} />
-                  </a>
-                )}
-
-                {player.linkedin && (
-                  <a
-                    href={player.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="
-                      grid h-9 w-9
-                      place-items-center
-                      border border-white/25
-                      bg-black/20
-                      text-white/75
-                      backdrop-blur-md
-                      transition
-                      hover:border-[#FFC928]
-                      hover:text-[#FFC928]
-                    "
-                  >
-                    <Linkedin size={15} />
-                  </a>
-                )}
-              </div>
             </div>
           </div>
 
@@ -671,6 +622,102 @@ function PlayerCard({ player }) {
           </div>
         </div>
       </motion.div>
+
+      {/* =====================================================
+          SOCIAL LINKS
+          Outside the 3D motion surface so clicking these
+          links never triggers the card flip.
+      ====================================================== */}
+
+      {!flipped && (
+        <div
+          className="
+            pointer-events-auto
+            absolute
+            bottom-5
+            right-5
+            z-[200]
+            flex
+            gap-2
+          "
+          onClick={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
+          {player.instagram && (
+            <a
+              href={player.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${player.name} Instagram`}
+              onClick={(e) => e.stopPropagation()}
+              className="
+                relative
+                z-[201]
+                grid
+                h-10
+                w-10
+                cursor-pointer
+                place-items-center
+                rounded-lg
+                border
+                border-white/25
+                bg-black/40
+                text-white
+                backdrop-blur-md
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-[#FFC928]
+                hover:bg-[#FFC928]
+                hover:text-[#071A2B]
+              "
+            >
+              <Instagram
+                size={17}
+                className="pointer-events-none"
+              />
+            </a>
+          )}
+
+          {player.linkedin && (
+            <a
+              href={player.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${player.name} LinkedIn`}
+              onClick={(e) => e.stopPropagation()}
+              className="
+                relative
+                z-[201]
+                grid
+                h-10
+                w-10
+                cursor-pointer
+                place-items-center
+                rounded-lg
+                border
+                border-white/25
+                bg-black/40
+                text-white
+                backdrop-blur-md
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-[#FFC928]
+                hover:bg-[#FFC928]
+                hover:text-[#071A2B]
+              "
+            >
+              <Linkedin
+                size={17}
+                className="pointer-events-none"
+              />
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }

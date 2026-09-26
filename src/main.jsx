@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import SocketTest from "./components/SocketTest";
+//import SocketTest from "./components/SocketTest";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      <SocketTest />
+     
     </BrowserRouter>
   </React.StrictMode>
   

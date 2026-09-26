@@ -14,9 +14,9 @@ export const players = [
     // ===== PLAYER DETAILS =====
     jerseyName: "MAYANK",
     age: "21",
-    height: "5'9\"",
-    verticalJump: "75 cm",
-    spikeReach: "300 cm",
+    height: "5'10\"",
+    verticalJump: "78 cm",
+    spikeReach: "322 cm",
 
     quote: "If the ball is alive, the point is still ours.",
 
@@ -37,8 +37,8 @@ export const players = [
     position: "Outside Hitter",
     role: "Spiker",
 
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/mohitkakas",
+    linkedin: "https://www.linkedin.com/in/mohit-yadav-b40104288/",
 
     image: "/images/players/player-02.jpeg",
 
@@ -68,15 +68,15 @@ export const players = [
     position: "Libero",
     role: "Libero",
 
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/_rajatt._18",
+    linkedin: "https://www.linkedin.com/in/rajat-payal/",
 
     image: "/images/players/player-03.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "RAJAT",
     age: "21",
-    height: "5'8\"",
+    height: "5'9\"",
     verticalJump: "65 cm",
     spikeReach: "285 cm",
 
@@ -99,10 +99,10 @@ export const players = [
     position: "Opposite Hitter",
     role: "Spiker",
 
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/ajeetkumar._.07",
+    linkedin: "https://www.linkedin.com/in/ajeet-kumar-meel-4a917a288/",
 
-    image: "",
+    image: "/images/players/Player-04.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "AJEET",
@@ -130,16 +130,16 @@ export const players = [
     position: "Outside Hitter",
     role: "Spiker",
 
-    instagram: "",
+    instagram: "https://www.instagram.com/yatuljaat",
     linkedin: "",
 
-    image: "",
+    image: "/images/players/Player-05.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "YATUL",
     age: "21",
-    height: "5'10\"",
-    verticalJump: "80 cm",
+    height: "6'0\"",
+    verticalJump: "68 cm",
     spikeReach: "310 cm",
 
     quote: "Pressure is just another point.",
@@ -161,10 +161,10 @@ export const players = [
     position: "Universal",
     role: "Blocker",
 
-    instagram: "",
+    instagram: "https://www.instagram.com/lodapavv",
     linkedin: "",
 
-    image: "",
+    image: "/images/players/Player-06.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "AMAN",
@@ -192,15 +192,15 @@ export const players = [
     position: "Universal",
     role: "Blocker",
 
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/k_pavan_larthik",
+    linkedin: "https://www.linkedin.com/in/pavan-karthik-k-175716287/",
 
-    image: "",
+    image: "/images/players/Player-07.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "PAWAN",
     age: "21",
-    height: "6'0\"",
+    height: "6'1\"",
     verticalJump: "86 cm",
     spikeReach: "318 cm",
 
@@ -223,17 +223,17 @@ export const players = [
     position: "Universal",
     role: "Spiker",
 
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/bhavessss.h",
+    linkedin: "https://www.linkedin.com/in/himbhavesh/",
 
-    image: "",
+    image: "/images/players/Player-08.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "BHAVESH",
     age: "21",
-    height: "5'11\"",
-    verticalJump: "83 cm",
-    spikeReach: "312 cm",
+    height: "5'10\"",
+    verticalJump: "72 cm",
+    spikeReach: "302 cm",
 
     quote: "Why follow the number when you can follow the ball?",
 
@@ -254,17 +254,17 @@ export const players = [
     position: "Hitter",
     role: "Spiker",
 
-    instagram: "",
+    instagram: "https://www.instagram.com/_amitch0udhary",
     linkedin: "",
 
-    image: "",
+    image: "/images/players/Player-09.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "AMIT",
     age: "22",
-    height: "5'10\"",
-    verticalJump: "78 cm",
-    spikeReach: "305 cm",
+    height: "6'0\"",
+    verticalJump: "88 cm",
+    spikeReach: "342 cm",
 
     quote: "One clean hit can change the entire rally.",
 
@@ -285,17 +285,17 @@ export const players = [
     position: "Libero",
     role: "Libero",
 
-    instagram: "",
-    linkedin: "",
+    instagram: "https://www.instagram.com/vikrantpunia8",
+    linkedin: "https://www.linkedin.com/in/vikrant-punia-3a5698325/",
 
-    image: "",
+    image: "/images/players/Player-10.jpeg",
 
     // ===== PLAYER DETAILS =====
     jerseyName: "VIKRANT",
     age: "21",
     height: "5'9\"",
-    verticalJump: "68 cm",
-    spikeReach: "290 cm",
+    verticalJump: "60 cm",
+    spikeReach: " ",
 
     quote: "The rally isn't over until the ball hits the floor.",
 

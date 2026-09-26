@@ -2,13 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import SmoothScroll from "./components/SmoothScroll";
 import IntroLoader from "./components/IntroLoader";
+
 import Home from "./pages/Home";
 import Players from "./pages/Players";
 import Events from "./pages/Events";
 import Journey from "./pages/Journey";
 import Memories from "./pages/Memories";
 import Contact from "./pages/Contact";
-import SocketTest from "./components/SocketTest";
 import Admin from "./pages/Admin";
 
 export default function App() {
@@ -16,6 +16,7 @@ export default function App() {
     <>
       <SmoothScroll />
       <IntroLoader />
+
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
