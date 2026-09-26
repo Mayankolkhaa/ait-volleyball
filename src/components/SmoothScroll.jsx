@@ -6,12 +6,12 @@ export default function SmoothScroll() {
     const lenis = new Lenis({
       duration: 1.15,
       smoothWheel: true,
+      smoothTouch: false,
       wheelMultiplier: 0.9,
-      touchMultiplier: 1.15,
-      syncTouch: true,
     });
 
     let frame;
+
     const raf = (time) => {
       lenis.raf(time);
       frame = requestAnimationFrame(raf);
