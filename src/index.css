@@ -124,3 +124,28 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================
+   MODAL SCROLL CONTROL
+============================================ */
+
+.modal-overlay {
+  overscroll-behavior: none;
+}
+
+.modal-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}

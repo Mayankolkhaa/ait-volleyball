@@ -955,22 +955,32 @@ const endMatch = async () => {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-4 lg:grid-cols-2">
-                {filteredEvents.map(
-                  (event) => (
-                    <EventAdminCard
-                      key={event.eventId}
-                      event={event}
-                      onEdit={
-                        openEditEvent
-                      }
-                      onDelete={
-                        deleteEvent
-                      }
-                    />
-                  )
-                )}
-              </div>
+              <div
+  className="
+    grid
+    max-h-[70vh]
+    gap-4
+    overflow-y-auto
+    overscroll-contain
+    pr-2
+    touch-pan-y
+    lg:grid-cols-2
+  "
+  style={{
+    WebkitOverflowScrolling: "touch",
+  }}
+  onWheel={(e) => e.stopPropagation()}
+  onTouchMove={(e) => e.stopPropagation()}
+>
+  {filteredEvents.map((event) => (
+    <EventAdminCard
+      key={event.eventId}
+      event={event}
+      onEdit={openEditEvent}
+      onDelete={deleteEvent}
+    />
+  ))}
+</div>
             )}
           </section>
         )}
@@ -1189,7 +1199,7 @@ function EventAdminCard({
   };
 
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20">
+    <article className="touch-pan-y rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20">
       <div className="flex items-start justify-between gap-4">
 
         <div>
@@ -1324,14 +1334,89 @@ function EventModal({
   onClose,
   onSubmit,
 }) {
-  return (
-    <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/70 p-4 backdrop-blur-sm sm:p-8">
+  useEffect(() => {
+    const previousOverflow =
+      document.body.style.overflow;
 
-      <div className="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-[#0B2238] shadow-2xl">
+    const previousTouchAction =
+      document.body.style.touchAction;
+
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
+    // Stop Lenis
+    window.dispatchEvent(
+      new Event("modal:open")
+    );
+
+    return () => {
+      document.body.style.overflow =
+        previousOverflow;
+
+      document.body.style.touchAction =
+        previousTouchAction;
+
+      // Restart Lenis
+      window.dispatchEvent(
+        new Event("modal:close")
+      );
+    };
+  }, []);
+
+  return (
+    <div
+      className="
+        fixed
+        inset-0
+        z-[100]
+        flex
+        items-start
+        justify-center
+        overflow-hidden
+        bg-black/70
+        p-4
+        backdrop-blur-sm
+        overscroll-none
+        sm:p-8
+      "
+    >
+
+      <div
+  className="
+    flex
+    h-[calc(100vh-32px)]
+    max-h-[calc(100vh-32px)]
+    w-full
+    max-w-4xl
+    flex-col
+    overflow-hidden
+    rounded-3xl
+    border
+    border-white/10
+    bg-[#0B2238]
+    shadow-2xl
+    sm:h-[calc(100vh-64px)]
+    sm:max-h-[calc(100vh-64px)]
+  "
+>
 
         {/* HEADER */}
 
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0B2238]/95 px-6 py-5 backdrop-blur sm:px-8">
+        <div
+  className="
+    flex
+    shrink-0
+    items-center
+    justify-between
+    border-b
+    border-white/10
+    bg-[#0B2238]/95
+    px-6
+    py-5
+    backdrop-blur
+    sm:px-8
+  "
+>
           <div>
             <p className="text-[8px] font-black uppercase tracking-[0.25em] text-[#FFC928]">
               Event Management
@@ -1357,9 +1442,23 @@ function EventModal({
         {/* FORM */}
 
         <form
-          onSubmit={onSubmit}
-          className="space-y-6 p-6 sm:p-8"
-        >
+  onSubmit={onSubmit}
+  className="
+    min-h-0
+    flex-1
+    space-y-6
+    overflow-y-auto
+    overscroll-contain
+    touch-pan-y
+    p-6
+    sm:p-8
+  "
+  style={{
+    WebkitOverflowScrolling: "touch",
+  }}
+  onWheel={(e) => e.stopPropagation()}
+  onTouchMove={(e) => e.stopPropagation()}
+>
 
           {/* BASIC */}
 

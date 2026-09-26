@@ -925,10 +925,19 @@ function EventDetails({ event, onClose }) {
     document.body.style.overflow = "hidden";
     document.body.style.touchAction = "none";
 
+    // Stop Lenis
+    window.dispatchEvent(
+      new Event("modal:open")
+    );
+
     return () => {
       document.body.style.overflow = previousOverflow;
       document.body.style.touchAction =
         previousTouchAction;
+
+        // Restart Lenis
+      window.dispatchEvent(
+        new Event("modal:close"))
     };
   }, [event]);
 
@@ -968,18 +977,18 @@ const isFinished =
         flex
         items-center
         justify-center
-        overflow-hidden
         bg-[#020A11]/90
         p-3
         backdrop-blur-xl
         sm:p-6
+        overscroll-none
       "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      onWheel={(e) => e.preventDefault()}
-      onTouchMove={(e) => e.preventDefault()}
+      //onWheel={(e) => e.preventDefault()}
+      //onTouchMove={(e) => e.preventDefault()}
     >
       <motion.div
         initial={{
@@ -1013,6 +1022,7 @@ const isFinished =
           rounded-2xl
           bg-[#071A2B]
           shadow-[0_30px_100px_rgba(0,0,0,.65)]
+          overscrool-contain
           sm:h-[calc(100vh-48px)]
           sm:max-h-[850px]
           sm:rounded-3xl
@@ -1170,8 +1180,12 @@ const isFinished =
 
         {/* CONTENT */}
 
-        <div className="min-h-0 flex-1 overflow-hidden p-4 sm:p-7">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain touch-pan-y px-4 pb-8 sm:p-6" 
+        onWheel={(e) => e.stopPropagation()}
+  onTouchMove={(e) => e.stopPropagation()}
+  >
           <AnimatePresence mode="wait">
+
             {/* OVERVIEW */}
 
             {section === "overview" && (
