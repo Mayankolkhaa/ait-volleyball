@@ -11,7 +11,7 @@ export default function Footer() {
     {
       name: "Instagram",
       icon: Instagram,
-      href: "https://www.instagram.com/aitvolleyball/",
+      href: "https://www.instagram.com/ait_volleyball/",
     },
     {
       name: "YouTube",

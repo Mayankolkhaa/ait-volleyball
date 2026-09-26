@@ -14,8 +14,8 @@ export default function Contact() {
   const socials = [
     {
       name: "Instagram",
-      handle: "@aitvolleyball",
-      href: "https://www.instagram.com/aitvolleyball/",
+      handle: "@ait_volleyball",
+      href: "https://www.instagram.com/ait_volleyball/",
       icon: Instagram,
     },
     {
