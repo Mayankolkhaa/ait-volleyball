@@ -33,12 +33,30 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://aitvolleyball.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://aitvolleyball.vercel.app",
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
-app.use(cors());
+//app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://aitvolleyball.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use("/api/matches", createMatchRoutes(io));

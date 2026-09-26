@@ -7,7 +7,8 @@ import Reveal from "../components/Reveal";
 import { journey } from "../data/journey";
 import { memories } from "../data/memories";
 import { players } from "../data/players";
-import { events } from "../data/events";
+//import { events } from "../data/events";
+import { useEffect, useState } from "react";
 
 //const heroImage = "https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=2200&q=90";
 const heroImage = "/images/hero/ait-volleyball-hero.jpeg";
@@ -73,6 +74,35 @@ export default function Home() {
   const finalBallRotate = useTransform(finalProgress, [0, 1], [0, 720]);
   const finalTextScale = useTransform(finalProgress, [0, .5, 1], [.75, 1, 1.15]);
   const finalTextOpacity = useTransform(finalProgress, [0, .25, .8, 1], [0, 1, 1, 0]);
+  
+  const API_URL = import.meta.env.VITE_API_URL;
+
+const [events, setEvents] = useState([]);
+const [eventsLoading, setEventsLoading] = useState(true);
+
+useEffect(() => {
+  const fetchEvents = async () => {
+    try {
+      setEventsLoading(true);
+
+      const response = await fetch(`${API_URL}/api/events`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch events");
+      }
+
+      setEvents(data.events || []);
+    } catch (error) {
+      console.error("Failed to fetch home events:", error);
+      setEvents([]);
+    } finally {
+      setEventsLoading(false);
+    }
+  };
+
+  fetchEvents();
+}, []);
 
   return (
     <div className="overflow-hidden">
@@ -315,34 +345,105 @@ export default function Home() {
 
       {/* EVENTS */}
       <section className="bg-[#FFC928] py-24 sm:py-32">
-        <div className="container-site">
-          <Reveal><SectionMarker number="05" label="Tournaments. Matches. Moments." /></Reveal>
-          <div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr]">
-            <div>
-              <h2 className="display text-7xl leading-[.8] text-[#071A2B] sm:text-[8rem]">NEXT<br /><span className="text-white">UP.</span></h2>
-              <p className="mt-7 max-w-sm text-sm leading-7 text-[#071A2B]/65">Follow the competitions and events that keep the team moving.</p>
-              <Link to="/events" className="mt-8 inline-flex items-center gap-3 bg-[#071A2B] px-6 py-4 text-xs font-black uppercase tracking-widest text-white">All Events <ArrowRight size={15} /></Link>
-            </div>
-            <div className="space-y-3">
-              {events.map((event, i) => (
-                <Reveal key={event.id} delay={i * .08}>
-                  <div className="group grid gap-4 bg-white p-5 transition hover:translate-x-2 sm:grid-cols-[90px_1fr_auto] sm:items-center">
-                    <div className="bg-[#071A2B] p-3 text-center text-white">
-                      <div className="display text-4xl">{event.day}</div>
-                      <div className="text-[10px] font-black">{event.month}</div>
-                    </div>
-                    <div>
-                      <h3 className="font-extrabold text-[#071A2B]">{event.title}</h3>
-                      <p className="mt-1 text-xs text-slate-500">{event.location}</p>
-                    </div>
-                    <ArrowRight className="text-[#071A2B] transition group-hover:translate-x-2" size={20} />
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+  <div className="container-site">
+    <Reveal>
+      <SectionMarker
+        number="05"
+        label="Tournaments. Matches. Moments."
+      />
+    </Reveal>
+
+    <div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr]">
+      
+      {/* LEFT */}
+      <div>
+        <h2 className="display text-7xl leading-[.8] text-[#071A2B] sm:text-[8rem]">
+          NEXT
+          <br />
+          <span className="text-white">UP.</span>
+        </h2>
+
+        <p className="mt-7 max-w-sm text-sm leading-7 text-[#071A2B]/65">
+          Follow the competitions and events that keep the team moving.
+        </p>
+
+        <Link
+          to="/events"
+          className="mt-8 inline-flex items-center gap-3 bg-[#071A2B] px-6 py-4 text-xs font-black uppercase tracking-widest text-white"
+        >
+          All Events
+          <ArrowRight size={15} />
+        </Link>
+      </div>
+
+      {/* RIGHT */}
+      <div className="space-y-3">
+
+        {eventsLoading ? (
+          <div className="bg-white p-6 text-sm font-bold text-[#071A2B]">
+            Loading events...
           </div>
-        </div>
-      </section>
+        ) : events.length === 0 ? (
+          <div className="bg-white p-6 text-sm font-bold text-[#071A2B]">
+            No upcoming events.
+          </div>
+        ) : (
+          events.slice(0, 4).map((event, i) => (
+            <Reveal
+              key={event.eventId}
+              delay={i * 0.08}
+            >
+              <Link
+                to="/events"
+                className="group grid gap-4 bg-white p-5 transition hover:translate-x-2 sm:grid-cols-[90px_1fr_auto] sm:items-center"
+              >
+
+                {/* DATE */}
+                <div className="bg-[#071A2B] p-3 text-center text-white">
+                  <div className="display text-4xl">
+                    {event.day}
+                  </div>
+
+                  <div className="text-[10px] font-black">
+                    {event.month}
+                  </div>
+                </div>
+
+                {/* EVENT INFO */}
+                <div>
+                  <div className="flex items-center gap-2">
+                    {event.status === "Live" && (
+                      <span className="flex items-center gap-1.5 text-[8px] font-black uppercase tracking-widest text-red-500">
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+                        Live
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="font-extrabold text-[#071A2B]">
+                    {event.title}
+                  </h3>
+
+                  <p className="mt-1 text-xs text-slate-500">
+                    {event.location || event.venue}
+                  </p>
+                </div>
+
+                {/* ARROW */}
+                <ArrowRight
+                  className="text-[#071A2B] transition group-hover:translate-x-2"
+                  size={20}
+                />
+
+              </Link>
+            </Reveal>
+          ))
+        )}
+
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* MEMORIES LAYERED */}
       <section ref={memoryRef} className="relative min-h-[120vh] overflow-hidden bg-white py-28 sm:py-36">

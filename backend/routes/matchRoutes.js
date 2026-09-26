@@ -40,11 +40,18 @@ const finishCurrentSet = (match, winner) => {
 
   const currentSet = match.sets[currentSetIndex];
 
+  // Make sure the set being finished is actually live.
+  if (currentSet.status !== "Live") {
+    throw new Error("Current set is not live");
+  }
+
+  // Mark current set as finished.
   currentSet.status = "Finished";
 
+  // Update sets won.
   if (winner === "ait") {
     match.aitSetsWon += 1;
-  } else {
+  } else if (winner === "opponent") {
     match.opponentSetsWon += 1;
   }
 
@@ -61,8 +68,6 @@ const finishCurrentSet = (match, winner) => {
     match.aitPoints = 0;
     match.opponentPoints = 0;
 
-    match.pointHistory = [];
-
     match.lastUpdated = new Date();
 
     return {
@@ -77,19 +82,31 @@ const finishCurrentSet = (match, winner) => {
 
   const nextSetNumber = match.currentSet + 1;
 
-  match.sets.push({
-    number: nextSetNumber,
-    ait: 0,
-    opponent: 0,
-    status: "Live",
-  });
+  // Find the already-created next set.
+  const nextSetIndex = match.sets.findIndex(
+    (set) => set.number === nextSetNumber
+  );
+
+  if (nextSetIndex !== -1) {
+    // Activate existing set.
+    match.sets[nextSetIndex].status = "Live";
+    match.sets[nextSetIndex].ait = 0;
+    match.sets[nextSetIndex].opponent = 0;
+  } else {
+    // Fallback in case the match was created
+    // without pre-created sets.
+    match.sets.push({
+      number: nextSetNumber,
+      ait: 0,
+      opponent: 0,
+      status: "Live",
+    });
+  }
 
   match.currentSet = nextSetNumber;
 
   match.aitPoints = 0;
   match.opponentPoints = 0;
-
-  match.pointHistory = [];
 
   match.lastUpdated = new Date();
 
@@ -661,7 +678,7 @@ router.post("/:eventId/end-match", async (req, res) => {
     // EMIT REAL-TIME UPDATE
     // ============================================
 
-    req.emit(
+    io.emit(
       "scoreUpdated",
       match
     );
@@ -893,14 +910,41 @@ router.post("/:eventId/finish-set", async (req, res) => {
     // Create next set
     // -----------------------------------------------------
 
-    const nextSetNumber = match.currentSet + 1;
+    // -----------------------------------------------------
+// Create / activate next set
+// -----------------------------------------------------
 
-    match.sets.push({
-      number: nextSetNumber,
-      ait: 0,
-      opponent: 0,
-      status: "Live",
-    });
+const nextSetNumber = match.currentSet + 1;
+
+const nextSetIndex = match.sets.findIndex(
+  (set) => set.number === nextSetNumber
+);
+
+if (nextSetIndex !== -1) {
+  // Activate the already-created set.
+  match.sets[nextSetIndex].status = "Live";
+  match.sets[nextSetIndex].ait = 0;
+  match.sets[nextSetIndex].opponent = 0;
+} else {
+  // Fallback if the next set does not exist.
+  match.sets.push({
+    number: nextSetNumber,
+    ait: 0,
+    opponent: 0,
+    status: "Live",
+  });
+}
+
+// -----------------------------------------------------
+// Move to next set
+// -----------------------------------------------------
+
+match.currentSet = nextSetNumber;
+
+match.aitPoints = 0;
+match.opponentPoints = 0;
+
+match.lastUpdated = new Date();
 
     // -----------------------------------------------------
     // Move to next set
